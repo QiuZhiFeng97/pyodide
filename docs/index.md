@@ -4,6 +4,7 @@
 
 - [Using Pyodide directly from Javascript](using_pyodide_from_javascript.md)
 - [Using Pyodide from Iodide](using_pyodide_from_iodide.md)
+- [Installing packages from PyPI](pypi.md)
 
 ## Developing Pyodide
 

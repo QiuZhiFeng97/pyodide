@@ -159,6 +159,7 @@ root/.built: \
 		src/sitecustomize.py \
 		src/webbrowser.py \
 		src/pyodide.py \
+	  src/micropip.py \
 		remove_modules.txt
 	rm -rf root
 	mkdir -p root/lib
@@ -174,6 +175,8 @@ root/.built: \
 	sed -i "s/__version__ =.*/__version__ = '$(shell git describe --tags | sed -r 's/^v//')'/g" \
 		root/lib/python$(PYMINOR)/site-packages/pyodide.py; \
 	fi
+	cp src/micropip.py $(SITEPACKAGES)
+	cp -r src/distlib $(SITEPACKAGES)
 	( \
 		cd root/lib/python$(PYMINOR); \
 		rm -fr `cat ../../../remove_modules.txt`; \
