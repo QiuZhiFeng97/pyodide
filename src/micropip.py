@@ -80,7 +80,7 @@ class WheelInstaller:
 
 class RawWheelInstaller(WheelInstaller):
     def fetch_wheel(self, name, fileinfo):
-        return fileinfo['url']
+        return 'https://cors-anywhere.herokuapp.com/' + fileinfo['url']
 
 
 class DevPiWheelInstaller(WheelInstaller):
@@ -114,7 +114,7 @@ class PackageManager:
             ctx = {'extra': None}
 
         if wheel_installer is None:
-            wheel_installer = DevPiWheelInstaller()
+            wheel_installer = RawWheelInstaller()
 
         complete_ctx = dict(markers.DEFAULT_CONTEXT)
         complete_ctx.update(ctx)
@@ -145,7 +145,7 @@ class PackageManager:
 
         # If we already have something that will work, don't
         # fetch again
-        for name, ver in transaction['locked']:
+        for name, ver in transaction['locked'].items():
             if name == req.name:
                 if matcher.match(ver):
                     break
