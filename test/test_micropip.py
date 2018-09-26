@@ -1,12 +1,14 @@
 import time
 
+
 def test_install_simple(selenium_standalone):
     selenium_standalone.run("import os")
     selenium_standalone.run("import micropip")
     selenium_standalone.run("micropip.install('snowballstemmer')")
 
     for i in range(10):
-        if selenium_standalone.run("os.path.exists('/lib/python3.6/site-packages/snowballstemmer')"):
+        if selenium_standalone.run(
+                "os.path.exists('/lib/python3.6/site-packages/snowballstemmer')"):
             break
         else:
             time.sleep(1)

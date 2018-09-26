@@ -117,7 +117,7 @@ test: all
 
 
 lint:
-	flake8 src
+	flake8 src --exclude distlib
 	flake8 test
 	flake8 tools/*
 	clang-format -output-replacements-xml src/*.c src/*.h src/*.js | (! grep '<replacement ')

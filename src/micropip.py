@@ -26,9 +26,11 @@ if window is not None:
         req = XMLHttpRequest.new()
         req.open('GET', url, True)
         req.responseType = 'arraybuffer'
+
         def callback(e):
             if req.readyState == 4:
                 cb(io.BytesIO(req.response))
+
         req.onreadystatechange = callback
         req.send(None)
 
@@ -98,7 +100,8 @@ class DevPiWheelInstaller(WheelInstaller):
         sha256 = fileinfo['digests']['sha256']
         wheel_url = (
             f"{self._base_url}/root/pypi/+f/"
-            f"{sha256[:3]}/{sha256[3:16]}/{fileinfo['filename']}#sha256={sha256}"
+            f"{sha256[:3]}/{sha256[3:16]}/"
+            f"{fileinfo['filename']}#sha256={sha256}"
         )
         return wheel_url
 
